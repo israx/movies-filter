@@ -13,13 +13,16 @@ export default function App() {
   function handleSubmit(e) {
     e.preventDefault();
     const url = `https://api.themoviedb.org/3/search/movie?api_key=6605f1ba59d4fdddf3a84a163b73c1f1&language=en-US&query=${query}&page=1&include_adult=false`;
-    const moviData = fetch(url);
-    moviData
-      .then((response) => response.json())
-      .then((value) => setMovie(value.results))
-      .catch((error) => console.log(error));
 
-    setQuery("");
+    if (query !== "") {
+      const moviData = fetch(url);
+      moviData
+        .then((response) => response.json())
+        .then((value) => setMovie(value.results))
+        .catch((error) => console.log(error));
+
+      setQuery("");
+    }
   }
   return (
     <div className="App">
